@@ -1,8 +1,7 @@
 #include <stdlib.h> // srand rand
-#include <stdio.h> // printf
-#include <stdbool.h> // bool
+#include <stdio.h> // printf, scanf
+#include <stdbool.h> // bool, true, false
 #include <assert.h> // assert
-#include <math.h> // floor
 #include <time.h> // time
 
 /** Minimal value the player should guess (inclusive). */
@@ -12,12 +11,14 @@ const int MAXIMUM = 30;
 /** How many attempts the player has to guess both values. */
 const int MAX_ATTEMPTS = 3;
 
+/** Generate a pseudo random number between `min` and `max` (both inclusive). */
 int randint(int min, int max)
 {
     assert(min < max);
     return min + rand() % (max - min + 1);
 }
 
+/** Title card of the game. Contains name and explanation of the game. */
 void print_title()
 {
     printf(
@@ -26,6 +27,7 @@ void print_title()
     );
 }
 
+/** Main loop of the game. Prompts player for numbers and tells him if he/she wins or not. */
 void run_game()
 {
     bool success = false;
@@ -58,6 +60,7 @@ void run_game()
     else printf("Well, maybe next time! %i and %i were correct.\n", rnd1, rnd2);
 }
 
+/** Prompts the player "Play another game? (y/n)" and returns `true` is he/she enters `y` or `j`. */
 bool ask_another_game()
 {
     char input;
@@ -66,6 +69,7 @@ bool ask_another_game()
     return input == 'y' || input == 'j';
 }
 
+/** Set random seed, prints title card and repeats `run_game()`, till the player quits. */
 int main()
 {
     srand(time(NULL));
